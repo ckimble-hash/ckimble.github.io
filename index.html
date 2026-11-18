@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Halo Dashboard Starter</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #08090c;
+      color: #e8e8ea;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      text-align: center;
+      padding: 2rem 3rem;
+      border: 1px solid #2a2d36;
+      border-radius: 12px;
+      background: #111319;
+    }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-weight: 600;
+    }
+    #clock {
+      font-size: 3rem;
+      font-variant-numeric: tabular-nums;
+      margin: 1rem 0;
+    }
+    .meta {
+      color: #8a8f9c;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .ok { color: #4ade80; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Halo Dashboard Starter</h1>
+    <div id="clock">--:--:--</div>
+    <div class="meta">
+      <div>Display: <span id="framed"></span></div>
+      <div>Viewport: <span id="size"></span></div>
+    </div>
+  </div>
+
+  <script>
+    // Live clock: confirms JavaScript runs inside the Halo iframe.
+    function tick() {
+      document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+    }
+
+    // Viewport size: shows how much space the Halo dashboard gives the page.
+    function showSize() {
+      document.getElementById('size').textContent = window.innerWidth + ' x ' + window.innerHeight;
+    }
+
+    var framed = document.getElementById('framed');
+    if (window.self !== window.top) {
+      framed.textContent = 'inside an iframe';
+      framed.className = 'ok';
+    } else {
+      framed.textContent = 'opened directly';
+    }
+
+    tick();
+    showSize();
+    setInterval(tick, 1000);
+    window.addEventListener('resize', showSize);
+  </script>
+</body>
+</html>
